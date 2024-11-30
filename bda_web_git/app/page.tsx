@@ -95,7 +95,7 @@ export default function Component() {
           />
           <div className="relative z-10 text-center space-y-8 w-full max-w-md px-4">
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-lg">
-              AI Fashion Design
+              Personal Fashion Designer
             </h1>
             <div className="space-y-4">
               <div className="flex justify-center gap-4">

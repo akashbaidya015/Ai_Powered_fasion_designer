@@ -77,13 +77,21 @@ export default function Component() {
             <div className="space-y-4">
               <div className="flex justify-center gap-4">
                 <Button
-                  className={`bg-white text-black ${gender === "Male" ? "font-bold" : ""}`}
+                  className={`bg-white text-black transition-all duration-300 ${
+                    gender === "Male"
+                      ? "font-bold bg-gray-300 scale-105 shadow-lg"
+                      : "hover:bg-gray-100"
+                  }`}
                   onClick={() => setGender("Male")}
                 >
                   Male
                 </Button>
                 <Button
-                  className={`bg-white text-black ${gender === "Female" ? "font-bold" : ""}`}
+                  className={`bg-white text-black transition-all duration-300 ${
+                    gender === "Female"
+                      ? "font-bold bg-gray-300 scale-105 shadow-lg"
+                      : "hover:bg-gray-100"
+                  }`}
                   onClick={() => setGender("Female")}
                 >
                   Female
@@ -138,3 +146,4 @@ export default function Component() {
     </div>
   )
 }
+

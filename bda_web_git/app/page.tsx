@@ -95,7 +95,7 @@ export default function Component() {
               </div>
               <Input 
                 type="text" 
-                placeholder="Explain your occasion for which you want to generate dress designs" 
+                placeholder="Explain the occasion you want to generate dress designs for" 
                 value={mood}
                 onChange={(e) => setMood(e.target.value)}
                 className="bg-white/80 text-black placeholder-gray-500 text-sm py-6"

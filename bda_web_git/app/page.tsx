@@ -14,8 +14,8 @@ export default function Component() {
   const [mood, setMood] = useState("")
 
   const handleGenerateDesign = async () => {
-    setIsGenerating(true);
-    setGeneratedImages([]); // Reset the images
+    setIsGenerating(true)
+    setGeneratedImages([]) // Reset the images
 
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/generate-image`, {
@@ -30,20 +30,18 @@ export default function Component() {
       });
 
       if (response.ok) {
-        const html = await response.text(); // Get the HTML response
-        const imgTags = html.match(/src="\/static\/[^"]+"/g); // Extract image URLs from the response
-        if (imgTags) {
-          const images = imgTags.map(tag => tag.replace(/src="|"/g, ""));
-          setGeneratedImages(images);
+        const data = await response.json() // Parse JSON response
+        if (data.images) {
+          setGeneratedImages(data.images) // Set images from backend
         }
       } else {
-        console.error("Error generating images:", response.statusText);
+        console.error("Error generating images:", response.statusText)
       }
     } catch (error) {
-      console.error("Error during API call:", error);
+      console.error("Error during API call:", error)
     }
 
-    setIsGenerating(false);
+    setIsGenerating(false)
   };
 
   return (
@@ -58,7 +56,6 @@ export default function Component() {
     >
       <div className="absolute inset-0 bg-black/10 backdrop-blur-sm" />
       <div className="relative">
-        {/* Navigation */}
         <nav className="flex items-center justify-between p-4 md:p-6 bg-white/80 backdrop-blur-sm">
           <Link href="#" className="flex items-center space-x-2">
             <div className="text-xl font-bold text-black">Team - Jab Data Met Model </div>
@@ -68,7 +65,6 @@ export default function Component() {
           </Button>
         </nav>
 
-        {/* Hero Section */}
         <div className="relative h-[80vh] flex items-center justify-center">
           <div className="relative z-10 text-center space-y-8 w-full max-w-md px-4">
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-lg">
@@ -122,7 +118,6 @@ export default function Component() {
           </div>
         </div>
 
-        {/* Generated Designs Section */}
         {!isGenerating && generatedImages.length > 0 && (
           <div className="bg-white/95 backdrop-blur-sm py-20">
             <div className="max-w-7xl mx-auto px-4">
@@ -131,7 +126,7 @@ export default function Component() {
                 {generatedImages.map((src, index) => (
                   <div key={index} className="aspect-square relative group overflow-hidden rounded-lg shadow-lg">
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_API_URL}${src}`}
+                      src={src}  // Use backend-provided URL directly
                       alt={`Generated design ${index + 1}`}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-110"
@@ -146,4 +141,3 @@ export default function Component() {
     </div>
   )
 }
-

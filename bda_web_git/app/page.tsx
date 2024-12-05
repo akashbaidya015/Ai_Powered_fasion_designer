@@ -70,7 +70,7 @@ export default function Component() {
         <div className="relative h-[80vh] flex items-center justify-center">
           <div className="relative z-10 text-center space-y-8 w-full max-w-md px-4">
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-lg">
-              Personal Fashion Designer
+              PERSONAL FASHION DESIGNER
             </h1>
             <div className="space-y-4">
               <div className="flex justify-center gap-4 items-center">

@@ -69,9 +69,9 @@ export default function Component() {
 
         <div className="relative h-[80vh] flex items-center justify-center">
           <div className="relative z-10 text-center space-y-8 w-full max-w-md px-4">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-lg">
-              PERSONAL FASHION DESIGNER
-            </h1>
+            <h2 className="text-6xl md:text-8xl font-montserrat font-bold tracking-tight text-white drop-shadow-lg -ml-8">
+              Personal Fashion Designer
+            </h2>
             <div className="space-y-4">
               <div className="flex justify-center gap-4 items-center">
                 <Button

@@ -12,6 +12,7 @@ export default function Component() {
   const [generatedImages, setGeneratedImages] = useState<string[]>([])
   const [gender, setGender] = useState("Male") // Default to Male
   const [mood, setMood] = useState("")
+  const [linkToBuy, setLinkToBuy] = useState(false) // Checkbox state
 
   const handleGenerateDesign = async () => {
     setIsGenerating(true)
@@ -26,6 +27,7 @@ export default function Component() {
         body: new URLSearchParams({
           prompt: mood,
           gender: gender,
+          linkToBuy: linkToBuy ? "true" : "false", // Include checkbox value
         }),
       });
 
@@ -71,7 +73,7 @@ export default function Component() {
               Personal Fashion Designer
             </h1>
             <div className="space-y-4">
-              <div className="flex justify-center gap-4">
+              <div className="flex justify-center gap-4 items-center">
                 <Button
                   className={`bg-white text-black transition-all duration-300 ${
                     gender === "Male"
@@ -92,10 +94,19 @@ export default function Component() {
                 >
                   Female
                 </Button>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={linkToBuy}
+                    onChange={(e) => setLinkToBuy(e.target.checked)}
+                    className="w-4 h-4"
+                  />
+                  <span className="text-white">Link to buy</span>
+                </label>
               </div>
               <Input 
                 type="text" 
-                placeholder="Explain the occasion you want to generate dress designs for" 
+                placeholder="Explain the occasion for which you want to generate dress designs" 
                 value={mood}
                 onChange={(e) => setMood(e.target.value)}
                 className="bg-white/80 text-black placeholder-gray-500 text-sm py-6"

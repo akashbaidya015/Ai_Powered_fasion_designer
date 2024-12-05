@@ -48,7 +48,7 @@ export default function Component() {
     <div 
       className="min-h-screen relative"
       style={{
-        backgroundImage: `url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/trendy-bohemian-abstract-element-liquid-shape-art-templates-with-floral-elements-for-social-media-posts-mobile-apps-banners-design-and-web-internet-ads-fashion-backgrounds-boho-style-background-vector.jpg-WZWf6t5lC85bI4ZDwFnKjeIcFD4xp6.jpeg')`,
+        backgroundImage: `url('https://storage.cloud.google.com/fashion_ui_background/AdobeStock_569671913_Preview.jpeg.jpg?authuser=1')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'

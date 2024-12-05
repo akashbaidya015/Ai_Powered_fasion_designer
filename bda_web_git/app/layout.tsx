@@ -25,6 +25,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Add the Google Font link here */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

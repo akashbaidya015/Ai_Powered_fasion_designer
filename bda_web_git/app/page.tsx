@@ -12,6 +12,7 @@ export default function Component() {
   const [generatedImages, setGeneratedImages] = useState<string[]>([])
   const [gender, setGender] = useState("Male") // Default to Male
   const [mood, setMood] = useState("")
+  const [linkToBuy, setLinkToBuy] = useState(false) // Checkbox state
 
   const handleGenerateDesign = async () => {
     setIsGenerating(true)
@@ -26,6 +27,7 @@ export default function Component() {
         body: new URLSearchParams({
           prompt: mood,
           gender: gender,
+          linkToBuy: linkToBuy ? "true" : "false", // Include checkbox value
         }),
       });
 
@@ -48,7 +50,7 @@ export default function Component() {
     <div 
       className="min-h-screen relative"
       style={{
-        backgroundImage: `url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/trendy-bohemian-abstract-element-liquid-shape-art-templates-with-floral-elements-for-social-media-posts-mobile-apps-banners-design-and-web-internet-ads-fashion-backgrounds-boho-style-background-vector.jpg-WZWf6t5lC85bI4ZDwFnKjeIcFD4xp6.jpeg')`,
+        backgroundImage: `url('https://storage.cloud.google.com/fashion_ui_background/AdobeStock_569671913_Preview.jpeg.jpg?authuser=1')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
@@ -67,11 +69,11 @@ export default function Component() {
 
         <div className="relative h-[80vh] flex items-center justify-center">
           <div className="relative z-10 text-center space-y-8 w-full max-w-md px-4">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-lg">
+            <h2 className="text-6xl md:text-8xl font-montserrat font-bold tracking-tight text-white drop-shadow-lg -ml-8">
               Personal Fashion Designer
-            </h1>
+            </h2>
             <div className="space-y-4">
-              <div className="flex justify-center gap-4">
+              <div className="flex justify-center gap-4 items-center">
                 <Button
                   className={`bg-white text-black transition-all duration-300 ${
                     gender === "Male"
@@ -92,10 +94,19 @@ export default function Component() {
                 >
                   Female
                 </Button>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={linkToBuy}
+                    onChange={(e) => setLinkToBuy(e.target.checked)}
+                    className="w-4 h-4"
+                  />
+                  <span className="text-white">Link to buy</span>
+                </label>
               </div>
               <Input 
                 type="text" 
-                placeholder="Explain your occasion for which you want to generate dress designs" 
+                placeholder="Explain the occasion for which you want to generate dress designs" 
                 value={mood}
                 onChange={(e) => setMood(e.target.value)}
                 className="bg-white/80 text-black placeholder-gray-500 text-sm py-6"

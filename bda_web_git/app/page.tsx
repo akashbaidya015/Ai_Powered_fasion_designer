@@ -13,6 +13,48 @@ export default function Component() {
   const [gender, setGender] = useState("Male") // Default to Male
   const [mood, setMood] = useState("")
   const [linkToBuy, setLinkToBuy] = useState(false) // Checkbox state
+  const [isModalOpen, setIsModalOpen] = useState(false) // Modal state
+  const [userData, setUserData] = useState({
+    name: '',
+    surname: '',
+    age: '',
+    address: '',
+    phone: '',
+    email: '',
+    favoriteColors: '',
+  });
+
+  const handleInputChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const handleFormSubmit = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submit-user-data`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        alert('User data submitted successfully!');
+        setIsModalOpen(false);
+        setUserData({
+          name: '',
+          surname: '',
+          age: '',
+          address: '',
+          phone: '',
+          email: '',
+          favoriteColors: '',
+        });
+      } else {
+        console.error('Failed to submit user data');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   const handleGenerateDesign = async () => {
     setIsGenerating(true)
@@ -62,7 +104,11 @@ export default function Component() {
           <Link href="#" className="flex items-center space-x-2">
             <div className="text-xl font-bold text-black">Team - Jab Data Met Model </div>
           </Link>
-          <Button variant="outline" className="bg-black text-white hover:bg-gray-900 border-none">
+          <Button
+            variant="outline"
+            className="bg-black text-white hover:bg-gray-900 border-none"
+            onClick={() => setIsModalOpen(true)}
+          >
             Log in
           </Button>
         </nav>
@@ -129,26 +175,49 @@ export default function Component() {
           </div>
         </div>
 
-        {!isGenerating && generatedImages.length > 0 && (
-          <div className="bg-white/95 backdrop-blur-sm py-20">
-            <div className="max-w-7xl mx-auto px-4">
-              <h2 className="text-3xl font-bold text-center mb-12">Your Generated Designs</h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                {generatedImages.map((src, index) => (
-                  <div key={index} className="aspect-square relative group overflow-hidden rounded-lg shadow-lg">
-                    <Image
-                      src={src}  // Use backend-provided URL directly
-                      alt={`Generated design ${index + 1}`}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-110"
-                    />
-                  </div>
-                ))}
+        {/* Generated Images Section */}
+        {generatedImages.length > 0 && (
+          <div className="mt-8 flex flex-wrap justify-center gap-6">
+            {generatedImages.map((imageUrl, index) => (
+              <div key={index} className="w-64 h-80 border border-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
+                <Image
+                  src={imageUrl}
+                  alt={`Generated Design ${index + 1}`}
+                  layout="intrinsic"
+                  width={384} // Specify desired width
+                  height={512} // Specify desired height
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {isModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+              <h2 className="text-2xl font-bold mb-4">Enter Your Details</h2>
+              <div className="space-y-3">
+                <Input name="name" placeholder="Name" value={userData.name} onChange={handleInputChange} />
+                <Input name="surname" placeholder="Surname" value={userData.surname} onChange={handleInputChange} />
+                <Input name="age" placeholder="Age" value={userData.age} onChange={handleInputChange} />
+                <Input name="address" placeholder="Address" value={userData.address} onChange={handleInputChange} />
+                <Input name="phone" placeholder="Phone" value={userData.phone} onChange={handleInputChange} />
+                <Input name="email" placeholder="Email" value={userData.email} onChange={handleInputChange} />
+                <Input name="favoriteColors" placeholder="Favorite Colors" value={userData.favoriteColors} onChange={handleInputChange} />
+              </div>
+              <div className="mt-4 flex justify-between">
+                <Button className="bg-gray-300" onClick={() => setIsModalOpen(false)}>
+                  Cancel
+                </Button>
+                <Button className="bg-blue-500 text-white" onClick={handleFormSubmit}>
+                  Submit
+                </Button>
               </div>
             </div>
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }

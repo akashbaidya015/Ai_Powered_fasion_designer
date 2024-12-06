@@ -57,7 +57,15 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        montserrat: ['"Montserrat Subrayada"', 'sans-serif'], // Add this line
+        montserrat: ['"Montserrat Subrayada"', 'sans-serif'], // Custom font
+      },
+      spacing: {
+        '128': '32rem',
+        '144': '36rem',
+      },
+      aspectRatio: {
+        '3/4': '3 / 4',
+        '4/5': '4 / 5',
       },
     },
   },

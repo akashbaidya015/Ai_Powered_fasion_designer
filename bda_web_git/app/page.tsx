@@ -24,7 +24,8 @@ export default function Component() {
     favoriteColors: '',
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 

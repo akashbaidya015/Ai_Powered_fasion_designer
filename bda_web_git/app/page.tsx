@@ -25,7 +25,6 @@ export default function Component() {
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 

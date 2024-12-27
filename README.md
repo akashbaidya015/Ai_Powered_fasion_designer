@@ -12,6 +12,8 @@ The **AI-Powered Fashion Designer** is an innovative project designed to generat
 - **AI-Powered Styling**: Utilizes Gemini AI to refine prompts for creative design outputs.
 - **Cached Designs**: Reuses cached outputs via Pinecone for faster results.
 - **Purchase Links**: Optionally provides purchase links for generated outfits.
+- **Image Captioning**: Adds detailed captions to generated designs, describing styles and complementary colors.
+
 
 ---
 
